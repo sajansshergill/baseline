@@ -66,3 +66,21 @@ def snapshot_on_or_before(conn: Connection, project_id: str, as_of: date) -> dic
 
 def list_projects(conn: Connection) -> list[str]:
     return list(conn.execute(text("SELECT project_id FROM project ORDER BY project_id")).scalars())
+
+
+def list_quarantine(conn: Connection, limit: int = 200) -> list[dict]:
+    """Rejected uploads with the latest quarantine reason for each."""
+    rows = conn.execute(
+        text(
+            """
+            SELECT u.filename, u.project_id, u.source_format, u.status,
+                   q.reason_code, q.rule, q.detail, q.sample, q.created_at
+            FROM quarantine_event q
+            JOIN upload u ON u.upload_id = q.upload_id
+            ORDER BY q.created_at DESC
+            LIMIT :limit
+            """
+        ),
+        {"limit": limit},
+    ).mappings()
+    return [dict(r) for r in rows]

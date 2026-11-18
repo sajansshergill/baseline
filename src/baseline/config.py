@@ -10,7 +10,12 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_prefix="BASELINE_", env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(
+        env_prefix="BASELINE_",
+        env_file=".env",
+        extra="ignore",
+        protected_namespaces=("settings_",),
+    )
 
     # Postgres connection used by the app. This role must NOT be a superuser,
     # otherwise row-level security is bypassed.

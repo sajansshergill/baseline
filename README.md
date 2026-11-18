@@ -424,7 +424,10 @@ make up        # docker compose up
 make install   # pip install
 make migrate   # alembic upgrade head
 make seed      # demo tenants + sample project
-make test      # run all tests
+make load      # ingest sample schedules
+make test      # run unit/integration tests
+make dashboard # Streamlit UI
+make viz       # 3D campus construction timeline → http://localhost:8765
 ```
 
 ---
@@ -474,7 +477,8 @@ Open http://localhost:3000 to see every pipeline step, run backfills, and view d
 ### Open the dashboard
 
 ```bash
-streamlit run dashboard/app.py
+make dashboard
+# or: PYTHONPATH=src:. streamlit run dashboard/app.py
 ```
 
 Open http://localhost:8501. The dashboard has four pages:
@@ -485,6 +489,14 @@ Open http://localhost:8501. The dashboard has four pages:
 | Snapshot diff | Pick any two dates and see what changed |
 | Slip risk | Tasks most likely to slip, with the reasons |
 | Quarantine | Rejected files and why they were rejected |
+
+### Open the 3D campus timeline
+
+```bash
+make viz
+```
+
+Open http://localhost:8765 for an animated Three.js build of the hyperscale campus — scrub weeks, watch critical-path links glow, and see slip-risk structures pulse amber.
 
 ---
 

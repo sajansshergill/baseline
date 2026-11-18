@@ -1,4 +1,4 @@
-.PHONY: up down install migrate seed load test lint dagster dashboard
+.PHONY: up down install migrate seed load test lint dagster dashboard viz
 
 up:
 	docker compose up -d
@@ -29,4 +29,7 @@ dagster:
 	dagster dev -m baseline.orchestration.definitions
 
 dashboard:
-	streamlit run dashboard/app.py
+	PYTHONPATH=src:. streamlit run dashboard/app.py
+
+viz:
+	python -m http.server 8765 --directory viz

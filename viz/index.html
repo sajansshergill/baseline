@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Baseline · Campus Build</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="stage"></div>
+
+  <header class="brand">
+    <p class="mark">Baseline</p>
+    <p class="tag">Hyperscale campus · live construction timeline</p>
+  </header>
+
+  <aside class="hud" aria-live="polite">
+    <div class="hud-block">
+      <span class="label">Week</span>
+      <strong id="weekLabel">01 / 52</strong>
+    </div>
+    <div class="hud-block">
+      <span class="label">Data date</span>
+      <strong id="dateLabel">2025-09-01</strong>
+    </div>
+    <div class="hud-block">
+      <span class="label">Health</span>
+      <strong id="healthLabel">—</strong>
+    </div>
+    <div class="hud-block warn">
+      <span class="label">Slip pressure</span>
+      <strong id="slipLabel">—</strong>
+    </div>
+    <p class="focus" id="focusLabel">Site mobilization</p>
+  </aside>
+
+  <div class="transport">
+    <button id="playBtn" type="button" aria-label="Play or pause">Pause</button>
+    <input id="scrubber" type="range" min="0" max="51" value="0" aria-label="Timeline week" />
+    <button id="orbitBtn" type="button">Free cam</button>
+  </div>
+
+  <footer class="legend">
+    <span><i class="swatch done"></i> Complete</span>
+    <span><i class="swatch active"></i> In progress</span>
+    <span><i class="swatch risk"></i> Slip risk</span>
+    <span><i class="swatch critical"></i> Critical path</span>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
